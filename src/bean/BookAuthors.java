@@ -1,9 +1,19 @@
 package bean;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity(name = "bookauthors")
 public class BookAuthors {
 	
+	@Column
 	private int BookID;
+	@Column
 	private String AuthorFirstName;
+	@Column
 	private String AuthorLastName;
 	
 	public BookAuthors() {}
@@ -25,6 +35,12 @@ public class BookAuthors {
 	}
 	public void setAuthorLastName(String authorLastName) {
 		AuthorLastName = authorLastName;
+	}
+
+	@Override
+	public String toString() {
+		return "BookAuthors [BookID=" + BookID + ", AuthorFirstName=" + AuthorFirstName + ", AuthorLastName="
+				+ AuthorLastName + "]";
 	}
 	
 	

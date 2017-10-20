@@ -1,11 +1,24 @@
 package bean;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity(name = "borrower")
 public class Borrower {
 	
+	@Id 
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int CardNo;
+	@Column
 	private String BorrowerLName;
+	@Column
 	private String BorrowerFName;
+	@Column
 	private String Address;
+	@Column
 	private String Phone;
 	
 	public Borrower() {}
@@ -48,6 +61,12 @@ public class Borrower {
 
 	public void setPhone(String phone) {
 		Phone = phone;
+	}
+
+	@Override
+	public String toString() {
+		return "Borrower [CardNo=" + CardNo + ", BorrowerLName=" + BorrowerLName + ", BorrowerFName=" + BorrowerFName
+				+ ", Address=" + Address + ", Phone=" + Phone + "]";
 	}
 	
 	

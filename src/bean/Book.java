@@ -1,10 +1,20 @@
 package bean;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity(name = "book")
 public class Book {
 	
-	
+	@Id 
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int BookID;
+	@Column
 	private String Title;
+	@Column
 	private String PublisherName;
 	
 	public Book() {}
@@ -26,6 +36,11 @@ public class Book {
 	}
 	public void setPublisherName(String publisherName) {
 		PublisherName = publisherName;
+	}
+
+	@Override
+	public String toString() {
+		return "Book [BookID=" + BookID + ", Title=" + Title + ", PublisherName=" + PublisherName + "]";
 	}
 
 }

@@ -2,13 +2,21 @@ package bean;
 
 import java.sql.Date;
 
+import javax.persistence.Column;
+
 public class BookLoans {
 	
+	@Column
 	private int BookID;
+	@Column
 	private int BranchID;
+	@Column
 	private int CardNo;
+	@Column
 	private Date DateOut;
+	@Column
 	private Date DueDate;
+	@Column
 	private Date DateReturned;
 	
 	public BookLoans() {}
@@ -48,6 +56,12 @@ public class BookLoans {
 	}
 	public void setDateReturned(Date dateReturned) {
 		DateReturned = dateReturned;
+	}
+
+	@Override
+	public String toString() {
+		return "BookLoans [BookID=" + BookID + ", BranchID=" + BranchID + ", CardNo=" + CardNo + ", DateOut=" + DateOut
+				+ ", DueDate=" + DueDate + ", DateReturned=" + DateReturned + "]";
 	}
 
 }
