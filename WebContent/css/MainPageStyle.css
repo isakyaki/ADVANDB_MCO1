@@ -10,6 +10,17 @@ body {
     background-repeat: repeat;
 }
 
+table,th,td {
+	
+	border: 1px solid silver;
+	border-collapse: collapse;
+}
+
+tr {
+	
+	text-align: center;
+}
+
 
 #query_container {
     
@@ -18,13 +29,19 @@ body {
     text-align: center;
 }
 
+.content {
+	
+	color: #e8edf4;
+}
+
 .result_container {
     
+    padding: 10px;
     margin-left: auto;
     margin-right: auto;
     margin-top: 5%;
     width: 700px;
-    height: 500px;
-    background-color: #9bbcf2;
+    background-color: #445c82;
+	overflow-y: auto;
     
 }
