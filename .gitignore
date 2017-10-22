@@ -1,0 +1,4 @@
+*.class
+build/classes/persistence.xml
+META-INF/persistence.xml
+*.jar
