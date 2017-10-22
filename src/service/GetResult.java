@@ -11,6 +11,7 @@ public class GetResult {
 	public static final String url = "jdbc:mysql://localhost:3306/librarydb";
 	public static final String user = "root";
 	public static final String pw = "1234";
+	public static double time = 0;
 	
 	public static ArrayList<Q1> Query1()
 	{
@@ -18,17 +19,19 @@ public class GetResult {
 		{
 			Class.forName(driver);
 			Connection conn = DriverManager.getConnection(url, user, pw);
-
+			
 			String query = "SELECT BL.BranchID, BL.BookID, BL.DateReturned " + 
 					"FROM book_loans BL " + 
 					"WHERE BL.DateReturned >= '2017-01-01' AND BL.DateReturned <= '2017-01-31' " + 
 					"ORDER BY BL.BranchID, BL.BookID, BL.DateReturned";
 
 			Statement st = conn.createStatement();
+
+			ArrayList<Q1> result = new ArrayList<Q1>();
+			
+			st.executeUpdate("SET PROFILING=1;");
 			ResultSet rs = st.executeQuery(query);
 			
-			ArrayList<Q1> result = new ArrayList<Q1>();
-
 			while (rs.next())
 			{
 				int brid = rs.getInt("BranchID");
@@ -38,6 +41,14 @@ public class GetResult {
 				Q1 nRow = new Q1(brid, bid, dr);
 				result.add(nRow);
 			}
+
+			try (ResultSet rs2 = st.executeQuery("SHOW PROFILES;")) {
+		        rs2.next();
+				time = rs2.getDouble("Duration");
+		    }
+			System.out.println(time);
+			
+		    st.executeUpdate("SET PROFILING=0;");
 			st.close();
 			
 			return result;
@@ -64,9 +75,11 @@ public class GetResult {
 					"ORDER BY BL.DueDate";
 
 			Statement st = conn.createStatement();
-			ResultSet rs = st.executeQuery(query);
 			
 			ArrayList<Q2> result = new ArrayList<Q2>();
+			
+			st.executeUpdate("SET PROFILING=1;");
+			ResultSet rs = st.executeQuery(query);
 
 			while (rs.next())
 			{
@@ -78,6 +91,14 @@ public class GetResult {
 				Q2 nRow = new Q2(cn, bid, dd, dr);
 				result.add(nRow);
 			}
+
+			try (ResultSet rs2 = st.executeQuery("SHOW PROFILES;")) {
+		        rs2.next();
+				time = rs2.getDouble("Duration");
+		    }
+			System.out.println(time);
+			
+		    st.executeUpdate("SET PROFILING=0;");
 			st.close();
 			
 			return result;
@@ -105,9 +126,11 @@ public class GetResult {
 					"ORDER BY NoBooksLoaned DESC, BO. BorrowerLastName";
 
 			Statement st = conn.createStatement();
-			ResultSet rs = st.executeQuery(query);
 			
 			ArrayList<Q3> result = new ArrayList<Q3>();
+			
+			st.executeUpdate("SET PROFILING=1;");
+			ResultSet rs = st.executeQuery(query);
 
 			while (rs.next())
 			{
@@ -119,6 +142,14 @@ public class GetResult {
 				Q3 nRow = new Q3(ln, fn, bid, a);
 				result.add(nRow);
 			}
+
+			try (ResultSet rs2 = st.executeQuery("SHOW PROFILES;")) {
+		        rs2.next();
+				time = rs2.getDouble("Duration");
+		    }
+			System.out.println(time);
+			
+		    st.executeUpdate("SET PROFILING=0;");
 			st.close();
 			
 			return result;
@@ -147,9 +178,11 @@ public class GetResult {
 					"ORDER BY COUNT(BL.CardNo) DESC, BO.BorrowerFirstName";
 
 			Statement st = conn.createStatement();
-			ResultSet rs = st.executeQuery(query);
 			
 			ArrayList<Q4> result = new ArrayList<Q4>();
+			
+			st.executeUpdate("SET PROFILING=1;");
+			ResultSet rs = st.executeQuery(query);
 
 			while (rs.next())
 			{
@@ -159,6 +192,14 @@ public class GetResult {
 				Q4 nRow = new Q4(fn, c);
 				result.add(nRow);
 			}
+
+			try (ResultSet rs2 = st.executeQuery("SHOW PROFILES;")) {
+		        rs2.next();
+				time = rs2.getDouble("Duration");
+		    }
+			System.out.println(time);
+			
+		    st.executeUpdate("SET PROFILING=0;");
 			st.close();
 			
 			return result;
@@ -184,9 +225,11 @@ public class GetResult {
 					"WHERE BO.Address <> LB.BranchAddress AND BL.CardNo = BO.CardNo AND BL.BranchID = LB.BranchID";
 
 			Statement st = conn.createStatement();
-			ResultSet rs = st.executeQuery(query);
 			
 			ArrayList<Q5> result = new ArrayList<Q5>();
+			
+			st.executeUpdate("SET PROFILING=1;");
+			ResultSet rs = st.executeQuery(query);
 
 			while (rs.next())
 			{
@@ -200,6 +243,14 @@ public class GetResult {
 				Q5 nRow = new Q5(cn, fn, a, brid, bn, ba);
 				result.add(nRow);
 			}
+
+			try (ResultSet rs2 = st.executeQuery("SHOW PROFILES;")) {
+		        rs2.next();
+				time = rs2.getDouble("Duration");
+		    }
+			System.out.println(time);
+			
+		    st.executeUpdate("SET PROFILING=0;");
 			st.close();
 			
 			return result;
@@ -226,9 +277,11 @@ public class GetResult {
 					"ORDER BY BA.AuthorLastName";
 
 			Statement st = conn.createStatement();
-			ResultSet rs = st.executeQuery(query);
 			
 			ArrayList<Q6> result = new ArrayList<Q6>();
+			
+			st.executeUpdate("SET PROFILING=1;");
+			ResultSet rs = st.executeQuery(query);
 
 			while (rs.next())
 			{
@@ -240,6 +293,14 @@ public class GetResult {
 				Q6 nRow = new Q6(t, ln, fn, a);
 				result.add(nRow);
 			}
+
+			try (ResultSet rs2 = st.executeQuery("SHOW PROFILES;")) {
+		        rs2.next();
+				time = rs2.getDouble("Duration");
+		    }
+			System.out.println(time);
+			
+		    st.executeUpdate("SET PROFILING=0;");
 			st.close();
 			
 			return result;
@@ -267,9 +328,11 @@ public class GetResult {
 					"ORDER BY bo.BorrowerLastName";
 
 			Statement st = conn.createStatement();
-			ResultSet rs = st.executeQuery(query);
 			
 			ArrayList<Q7> result = new ArrayList<Q7>();
+			
+			st.executeUpdate("SET PROFILING=1;");
+			ResultSet rs = st.executeQuery(query);
 
 			while (rs.next())
 			{
@@ -281,6 +344,14 @@ public class GetResult {
 				Q7 nRow = new Q7(c, ln, fn, a);
 				result.add(nRow);
 			}
+
+			try (ResultSet rs2 = st.executeQuery("SHOW PROFILES;")) {
+		        rs2.next();
+				time = rs2.getDouble("Duration");
+		    }
+			System.out.println(time);
+			
+		    st.executeUpdate("SET PROFILING=0;");
 			st.close();
 			
 			return result;
@@ -308,9 +379,11 @@ public class GetResult {
 					"ORDER BY lb.BranchName";
 
 			Statement st = conn.createStatement();
-			ResultSet rs = st.executeQuery(query);
 			
 			ArrayList<Q8> result = new ArrayList<Q8>();
+			
+			st.executeUpdate("SET PROFILING=1;");
+			ResultSet rs = st.executeQuery(query);
 
 			while (rs.next())
 			{
@@ -321,6 +394,14 @@ public class GetResult {
 				Q8 nRow = new Q8(c, bn, pn);
 				result.add(nRow);
 			}
+
+			try (ResultSet rs2 = st.executeQuery("SHOW PROFILES;")) {
+		        rs2.next();
+				time = rs2.getDouble("Duration");
+		    }
+			System.out.println(time);
+			
+		    st.executeUpdate("SET PROFILING=0;");
 			st.close();
 			
 			return result;
