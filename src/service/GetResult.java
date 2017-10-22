@@ -91,7 +91,7 @@ public class GetResult {
 		}
 	}
 	
-	public static ArrayList<Q3> Query3()
+	public static ArrayList<Q3> Query3(String address)
 	{
 		try
 		{
@@ -100,7 +100,7 @@ public class GetResult {
 
 			String query = "SELECT BO.BorrowerLastName, BO.BorrowerFirstName, COUNT(BL.BookID) AS NoBooksLoaned, BO.Address " + 
 					"FROM book_loans BL, borrower BO " + 
-					"WHERE BL.CardNo = BO.CardNo AND BO.Address = 'Seoul' " + 
+					"WHERE BL.CardNo = BO.CardNo AND BO.Address = '" + address + "' " + 
 					"GROUP BY BL.CardNo " + 
 					"ORDER BY NoBooksLoaned DESC, BO. BorrowerLastName";
 
@@ -171,7 +171,7 @@ public class GetResult {
 			System.err.println(e.getMessage());
 		}
 		*/
-		ArrayList<Q3> result = Query3();
+		ArrayList<Q3> result = Query3("New York");
 		
 		for(Q3 r: result) {
 			System.out.println(r.toString());
